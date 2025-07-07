@@ -1,6 +1,6 @@
 {
   "name": "discoforge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A professional Discord bot scaffolding CLI built with Node.js.",
   "main": "index.js",
   "bin": {
