@@ -13,7 +13,6 @@ const {
 } = require("@clack/prompts");
 const chalk = require("chalk");
 
-// ✅ أول حاجة: تأكيد تثبيت مكتبة discoforge
 (async () => {
   const installSelf = await confirm({
     message: "Do you want to install 'discoforge' package before continuing? (y/n)",
@@ -21,8 +20,8 @@ const chalk = require("chalk");
   });
 
   if (!installSelf) {
-    console.log(chalk.red("❌ Setup cancelled. 'discoforge' is required."));
-    process.exit(1); // يوقف السكربت فورا
+    console.log(chalk.red("Setup cancelled. 'discoforge' is required."));
+    process.exit(1); 
   }
 
   try {
@@ -30,13 +29,10 @@ const chalk = require("chalk");
     execSync("npm install discoforge", {
       stdio: "inherit",
     });
-    console.log(chalk.green("✅ 'discoforge' installed successfully.\n"));
   } catch (err) {
-    console.error(chalk.red("❌ Failed to install 'discoforge':"), err.message);
+    console.error(chalk.red("Failed to install 'discoforge':"), err.message);
     process.exit(1);
   }
-
-  // ✅ باقي السكربت بعد التثبيت
   intro(chalk.cyan("Welcome to DiscoForge Setup!"));
 
   const projectName = await text({
