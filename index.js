@@ -20,7 +20,7 @@ const chalk = require("chalk");
   });
 
   if (!installSelf) {
-    console.log(chalk.red("Setup cancelled. 'discoforge' is required."));
+    console.log(chalk.red(" Setup cancelled. 'discoforge' is required."));
     process.exit(1); 
   }
 
