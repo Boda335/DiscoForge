@@ -11,7 +11,7 @@ const bot = {
 
 const embedSettings = {
   successcolor: "#00ff00",
-  color: "#6b0901",
+  color: "#704902",
   wrongcolor: "#b50b0b",
 };
 const options = {

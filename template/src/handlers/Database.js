@@ -10,7 +10,7 @@ module.exports = async (client) => {
   if (
     !mongoURL ||
     mongoURL.trim() === "" ||
-    mongoURL.includes("YOUR_MONGO_URL")
+    mongoURL.includes("MONGODB_URL")
   ) {
     client.log(["warningColor", "WARNING:"],["1", "MongoDB URL is not provided or is set to the default placeholder. Skipping MongoDB connection."]);
     return;

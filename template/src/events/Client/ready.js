@@ -37,7 +37,7 @@ module.exports = {
       await Database(client);
 
       await registerSlashCommands(client);
-      client.log(["successColor", "SUCCESS:"], ["1", `Bot logged in successfully! ${client.user.tag}`]);
+      client.log(["successColor", "SUCCESS:"], ["1", `Bot logged in successfully!`],["highlightColor",client.user.tag]);
 
       console.log(
         chalk.cyan(`Servers:` + un(`${client.guilds.cache.size}`)),

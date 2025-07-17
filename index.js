@@ -87,7 +87,7 @@ const chalk = require("chalk");
   createPackageJson(targetDir);
 
   if (installDeps) {
-    const deps = ["axios", "chalk@4", "moment", "ms", "systeminformation"];
+    const deps = ["discoforge","axios", "chalk@4", "moment", "ms", "systeminformation"];
 
     if (installDiscordJS) deps.push("discord.js");
     if (installMongo) deps.push("mongoose");

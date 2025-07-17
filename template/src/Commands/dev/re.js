@@ -1,3 +1,4 @@
+const reloadCommandsAndEvents = require("../../handlers/handler");
 const {
   ApplicationCommandOptionType,
   EmbedBuilder,
