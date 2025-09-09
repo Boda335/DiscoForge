@@ -89,7 +89,7 @@ const chalk = require("chalk");
       "ms",
       "systeminformation",
       "ascii-table",
-      "module-alias/register",
+      "module-alias",
     ];
 
     if (installDiscordJS) deps.push("discord.js");
