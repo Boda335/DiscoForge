@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const basePkg = require("./package.json");
 const { execSync } = require("child_process");
 const {
   intro,
@@ -88,6 +89,7 @@ const chalk = require("chalk");
       "ms",
       "systeminformation",
       "ascii-table",
+      "module-alias/register",
     ];
 
     if (installDiscordJS) deps.push("discord.js");
@@ -124,7 +126,7 @@ function copyRecursive(src, dest) {
 function createPackageJson(dir) {
   const pkg = {
     name: path.basename(dir),
-    version: "1.0.0",
+    version: basePkg.version,
     description: "A professional Discord bot with a modular command handler.",
     main: "bot.js",
     scripts: {
@@ -148,6 +150,17 @@ function createPackageJson(dir) {
       url: "https://github.com/Boda335/DiscoForge/issues",
     },
     homepage: "https://github.com/Boda335/DiscoForge/blob/main/README.md",
+    _moduleAliases: {
+    "@root": ".",
+    "@src": "src/",
+    "@base": "src/Base/",
+    "@functions": "src/functions/",
+    "@events": "src/events/",
+    "@handlers": "src/handlers/",
+    "@database": "schema/",
+    "@components": "src/ComponentsActions/",
+    "@settings": "settings/"
+  }
   };
   fs.writeFileSync(
     path.join(dir, "package.json"),

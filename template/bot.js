@@ -1,3 +1,4 @@
+require("module-alias/register");
 const NEXUS = require("./src/handlers/Nexus.js");
 const { TOKEN } = require("./settings/config");
 const discoforge = require("./settings/discoforge");
