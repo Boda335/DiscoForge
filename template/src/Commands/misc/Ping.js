@@ -1,25 +1,19 @@
-const {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-} = require("discord.js");
+const { ApplicationCommandType } = require('discord.js');
 /**
  * @type {import("../../Base/baseCommand")}
  */
 module.exports = {
-  name: "ping",
-  description:
-    "Ping the bot and get the current latency",
+  name: 'ping',
+  description: 'Ping the bot and get the current latency',
   cooldown: 10,
-  category: "OWNER",
-  botPermissions: [],
-  userPermissions: [],
+  category: 'misc',
+  botPermissions: ["SendMessages"],
+  userPermissions: ["SendMessages"],
   options: [],
+  type: ApplicationCommandType.ChatInput,
   command: {
     enabled: false,
-    aliases: ["p", "latency"],
+    aliases: ['p', 'latency'],
     minArgsCount: 0,
   },
   slashCommand: {

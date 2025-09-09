@@ -1,4 +1,5 @@
-const { cooldown, getPermissionName } = require("../../handlers/functions");
+const cooldown = require("../../functions/cooldown");
+const getPermissionName = require("../../functions/getPermissionName");
 const { PREFIX: botPrefix } = require("../../../settings/config");
 const {
   PermissionsBitField,

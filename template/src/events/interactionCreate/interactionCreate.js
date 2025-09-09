@@ -1,8 +1,7 @@
-const {
-  cooldown,
-  getPermissionName,
-  handleInteraction,
-} = require("../../handlers/functions");
+
+const cooldown = require("../../functions/cooldown");
+const getPermissionName = require("../../functions/getPermissionName");
+const handleInteraction = require("../../functions/handleInteraction");
 const { emoji } = require("../../../settings/config");
 const {
   ApplicationCommandOptionType,

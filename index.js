@@ -10,29 +10,22 @@ const {
   text,
   isCancel,
   spinner,
+  
 } = require("@clack/prompts");
 const chalk = require("chalk");
 
 (async () => {
   const installSelf = await confirm({
-    message: "Do you want to install 'discoforge' package before continuing? (y/n)",
+    message:
+      "Do you want to install 'discoforge' package before continuing? (y/n)",
     initialValue: true,
   });
 
   if (!installSelf) {
     console.log(chalk.red("Setup cancelled. 'discoforge' is required."));
-    process.exit(1); 
-  }
-
-  try {
-    console.log(chalk.yellow("Installing 'discoforge' package..."));
-    execSync("npm install discoforge", {
-      stdio: "inherit",
-    });
-  } catch (err) {
-    console.error(chalk.red("Failed to install 'discoforge':"), err.message);
     process.exit(1);
   }
+
   intro(chalk.cyan("Welcome to DiscoForge Setup!"));
 
   const projectName = await text({
@@ -87,7 +80,15 @@ const chalk = require("chalk");
   createPackageJson(targetDir);
 
   if (installDeps) {
-    const deps = ["discoforge","axios", "chalk@4", "moment", "ms", "systeminformation"];
+    const deps = [
+      "discoforge",
+      "axios",
+      "chalk@4",
+      "moment",
+      "ms",
+      "systeminformation",
+      "ascii-table",
+    ];
 
     if (installDiscordJS) deps.push("discord.js");
     if (installMongo) deps.push("mongoose");

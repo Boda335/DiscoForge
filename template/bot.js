@@ -1,6 +1,6 @@
-const NEXUS = require("./src/handlers/Client.js");
+const NEXUS = require("./src/handlers/Nexus.js");
 const { TOKEN } = require("./settings/config");
-const config = require("./settings/config"); // تأكد إن فيه logging.errorLogs
+const discoforge = require("./settings/discoforge");
 const chalk = require("chalk");
 const axios = require("axios");
 const fs = require("fs");
@@ -8,8 +8,8 @@ const path = require("path");
 const process = require("node:process");
 const client = new NEXUS();
 require("events").EventEmitter.setMaxListeners(999999999);
-
-const webhookURL = config.errorLogs || null;
+const errorLoggingEnabled = discoforge.errorLogging.enabled;
+const webhookURL = discoforge.errorLogging.errorLogs || null;
 const errorsDir = path.join(__dirname, "./errors");
 
 function ensureErrorDirectoryExists() {
@@ -19,6 +19,7 @@ function ensureErrorDirectoryExists() {
 }
 
 function logErrorToFile(errorContent) {
+  if (!errorLoggingEnabled) return;
   ensureErrorDirectoryExists();
   const fileName = `${new Date().toISOString().replace(/:/g, "-")}.txt`;
   const filePath = path.join(errorsDir, fileName);
@@ -26,10 +27,9 @@ function logErrorToFile(errorContent) {
 }
 
 async function sendErrorNotification(message) {
-  if (!webhookURL || webhookURL === "YOUR_DISCORD_WEBHOOK_URL") {
-    console.warn(
-      chalk.yellow.bold("WARNING:") + " No valid webhook URL provided."
-    );
+  if (!errorLoggingEnabled) return;
+  if (!webhookURL || webhookURL === "WEBHOOK_URL") {
+    client.log(["warningColor", "WARNING:"], ["1", "No valid webhook URL provided."]);
     return;
   }
 
@@ -44,10 +44,7 @@ async function sendErrorNotification(message) {
   };
 
   await axios.post(webhookURL, { embeds: [embed] }).catch((err) => {
-    console.warn(
-      chalk.yellow.bold("WARNING:") + " Failed to send error to Discord:",
-      err.message
-    );
+    client.log(["warningColor", "WARNING:"], ["1", "Failed to send error to Discord:", err.message]);
   });
 }
 

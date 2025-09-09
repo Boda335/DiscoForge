@@ -1,4 +1,4 @@
-const baseClient = require("../handlers/Client");
+const baseClient = require("./baseClient");
 
 
 /**

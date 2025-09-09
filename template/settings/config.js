@@ -1,42 +1,41 @@
 const bot = {
-  TOKEN: "BOT_TOKEN",
-  PREFIX: "BOT_PREFIX",
-  ID: "CLIENT_ID",
-  MONGO_URL: "MONGODB_URL",
-  Owners: ["OWNER_ID", "OWNER_ID2", "OWNER_ID3"],
-  Dev: "[`Boda3350`](<https://discord.com/users/1139143053387509840>)",
-  DevTeam: "[`neXus-Team`](https://dsc.gg/enexus)",
-  errorLogs: "WEBHOOK_URL",
+  TOKEN: 'BOT_TOKEN',
+  PREFIX: 'BOT_PREFIX',
+  ID: 'CLIENT_ID',
+  MONGO_URL: 'MONGODB_URL',
+  Owners: ['OWNER_ID', 'OWNER_ID2', 'OWNER_ID3'],
+  Dev: `\`\`\`[Boda3350]\`\`\`(${links.Devloper})`,
+  DevTeam: `\`\`\`[Foxy Code Team]\`\`\`(${links.DiscordServer})`,
 };
 
 const embedSettings = {
-  successcolor: "#00ff00",
-  color: "#704902",
-  wrongcolor: "#b50b0b",
+  successcolor: '#00ff00',
+  color: '#ff6301',
+  wrongcolor: '#b50b0b',
 };
 const options = {
   embedFooter: true,
 };
 const emojiSettings = {
-  ERROR: "✖",
-  SUCCESS: "✅",
-  disabled: "🔴",
-  enabled: "🟢",
-  cleared: "🧹",
-  time: "⏲️",
-  ping: "🏓",
-  bot: "🤖",
+  ERROR: '❌',
+  SUCCESS: '✅',
+  disabled: '🔴',
+  enabled: '🟢',
+  cleared: '🧹',
+  time: '⏲️',
+  ping: '🏓',
+  bot: '🤖',
 };
 
 const links = {
   inviteURL: `https://discord.com/api/oauth2/authorize?client_id=BOTID&permissions=6508997968&scope=bot%20applications.commands`,
-  DiscordServer: `https://dsc.gg/enexus`,
+  DiscordServer: `discord.gg/AT6W2nHEVz`,
   Devloper: `https://discord.com/users/1139143053387509840`,
 };
 
 const slashSettings = {
   global: true,
-  guildIDS: ["1344065394368839701"],
+  guildIDS: ['1344065394368839701'],
 };
 
 module.exports = {

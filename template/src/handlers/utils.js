@@ -1,4 +1,4 @@
-const JUGNU = require("./Client");
+const Nexus = require("./Nexus.js");
 const { Message } = require("discord.js");
 const {
   EmbedBuilder,
@@ -14,7 +14,7 @@ const {
 
 /**
  *
- * @param {JUGNU} client
+ * @param {Nexus} client
  */
 module.exports = async (client) => {
   /**

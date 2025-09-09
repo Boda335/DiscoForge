@@ -1,9 +1,9 @@
 /**
- * @param {import("../handlers/Client")} client
+ * @param {import("./baseClient")} client
  * @param {import("discord.js").ChatInputCommandInteraction} interaction
  * @param {boolean} [isEdit]
  * @returns {Promise<void>}
  */
 async function BaseFunctionInteraction(client, interaction, isEdit) {}
 
-module.exports = { BaseFunctionInteraction };
+module.exports = BaseFunctionInteraction;

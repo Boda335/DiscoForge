@@ -1,61 +1,46 @@
 const { ActivityType } = require("discord.js");
-const { registerSlashCommands } = require("../../handlers/functions.js");
+const registerSlashCommands = require("../../functions/registerSlashCommands");
 const Database = require("../../handlers/Database.js");
-const chalk = require("chalk");
-const NEXUS = require("../../handlers/Client");
-
+const NEXUS = require("../../handlers/Nexus.js");
+const discoforge = require("../../../settings/discoforge.js");
 module.exports = {
-  name: "ready",
+  name: "clientReady",
   once: true,
   /**
    * @param {NEXUS} client
    */
   async execute(client) {
     try {
-      
-      const gr = chalk.hex("#00D100");
-      const un = chalk.underline;
-      const statuses = [
-        () => `${client.guilds.cache.size} Server`,
-        () =>
-          `${client.guilds.cache
-            .reduce((a, b) => a + b.memberCount, 0)
-            .toLocaleString()} Users`,
-        () => `${client.config.PREFIX}help|/help`,
-        () => `https://discord.gg/Wn6z6yD7n3`,
-      ];
+      const presenceConfig = discoforge.presence || {};
 
-      let index = 0;
-      setInterval(() => {
-        client.user.setActivity({
-          name: statuses[index](),
-          type: ActivityType.Listening,
-        });
-        index = (index + 1) % statuses.length;
-      }, 10000);
-      client.user.setStatus("idle");
+      if (presenceConfig.enabled) {
+        const names = Array.isArray(presenceConfig.names)
+          ? presenceConfig.names
+          : [presenceConfig.names];
+
+        let index = 0;
+        setInterval(() => {
+          client.user.setActivity({
+            name: names[index],
+            type: ActivityType[presenceConfig.type] || ActivityType.Playing,
+            url:
+              presenceConfig.type === "STREAMING"
+                ? presenceConfig.streamingUrl
+                : undefined,
+          });
+          index = (index + 1) % names.length;
+        }, presenceConfig.interval);
+
+        client.user.setStatus(presenceConfig.status);
+      }
+
       await Database(client);
-
       await registerSlashCommands(client);
-      client.log(["successColor", "SUCCESS:"], ["1", `Bot logged in successfully!`],["highlightColor",client.user.tag]);
 
-      console.log(
-        chalk.cyan(`Servers:` + un(`${client.guilds.cache.size}`)),
-        chalk.red(
-          `Users:` +
-            un(
-              `${client.guilds.cache
-                .reduce((a, b) => a + b.memberCount, 0)
-                .toLocaleString()}`
-            )
-        ),
-        chalk.blue(
-          `Commands:` +
-            un(
-              ` ${client.commands.size}` +
-                ` TOTAL Commands ${client.commands.size}`
-            )
-        )
+      client.log(
+        ["successColor", "SUCCESS:"],
+        ["1", `Bot logged in successfully!`],
+        ["highlightColor", client.user.tag]
       );
     } catch (error) {
       console.error("Error in ready event:", error);
