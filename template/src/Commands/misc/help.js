@@ -14,7 +14,7 @@ module.exports = {
   type: ApplicationCommandType.ChatInput,
   command: {
     enabled: true,
-    aliases: ["helpme", "commands", "cmd"],
+    aliases: ['helpme', 'commands', 'cmd'],
     minArgsCount: 0,
   },
   slashCommand: {
@@ -25,10 +25,7 @@ module.exports = {
     try {
       client.handleHelpSystem(message);
     } catch (error) {
-      client.log(
-        ['errorColor', 'ERROR:'],
-        ['1', `An error occurred while executing the help command: ${error.message}`],
-      );
+      client.log(['errorColor', 'ERROR:'], ['1', `An error occurred while executing the help command: ${error.message}`]);
       message.reply({
         content: `An error occurred while executing the help command: ${error.message}`,
       });
@@ -39,10 +36,7 @@ module.exports = {
     try {
       client.handleHelpSystem(interaction);
     } catch (error) {
-      client.log(
-        ['errorColor', 'ERROR:'],
-        ['1', `An error occurred while executing the help command: ${error.message}`],
-      );
+      client.log(['errorColor', 'ERROR:'], ['1', `An error occurred while executing the help command: ${error.message}`]);
       interaction.reply({
         content: `An error occurred while executing the help command: ${error.message}`,
         ephemeral: true,

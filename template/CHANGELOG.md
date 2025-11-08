@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.5.0] - 2025-11-08
+### Updated
+- Rebranded references from Foxy Code Team to Nexus Studio Team
+- Updated Discord invite links throughout README, CHANGELOG, and config files
+- Enhanced CLI setup experience with gradient ASCII art, improved prompts, progress bars, and a summary box using `boxen` and `gradient-string`
+- Added `dotenv` support for environment variables and created a default `.env` file
+- Updated dependencies in `package.json` and `package-lock.json`
+- Cleaned up Prettier config and removed unused template files
+
+---
+
 ## [2.0.0] - 2025-09-09
 ### Added
 - Modular command handler ([template/src/handlers/CommandLoader.js](template/src/handlers/CommandLoader.js))
@@ -59,6 +70,6 @@ All notable changes to this project will be documented in this file.
 
 ## Credits
 
-Made by [Boda3350](https://discord.com/users/1139143053387509840) and Foxy Code Team.  
+Made by [Boda3350](https://discord.com/users/1139143053387509840) and Nexus Studio Team.  
 Powered by DiscoForge.  
-Join our [Discord Community](https://discord.gg/AT6W2nHEVz) for support and feedback.
+Join our [Discord Community](https://discord.gg/9cfgTktxHm) for support and feedback.

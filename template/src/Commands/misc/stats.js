@@ -1,24 +1,24 @@
-const { EmbedBuilder, version, ApplicationCommandType } = require("discord.js");
-const formatBytes = require("../../functions/formatBytes");
-const os = require("systeminformation");
-const pkg = require("../../../package.json");
-const NEXUS = require("../../handlers/Nexus.js");
+const { EmbedBuilder, version, ApplicationCommandType } = require('discord.js');
+const formatBytes = require('../../functions/formatBytes');
+const os = require('systeminformation');
+const pkg = require('../../../package.json');
+const NEXUS = require('../../handlers/Nexus.js');
 
 /**
  * @type {import("../../Base/baseCommand")}
  */
 module.exports = {
-  name: "botinfo",
-  description: "Shows bot statistics",
+  name: 'botinfo',
+  description: 'Shows bot statistics',
   cooldown: 10,
-  category: "misc",
-  botPermissions: ["SendMessages"],
-  userPermissions: ["SendMessages"],
+  category: 'misc',
+  botPermissions: ['SendMessages'],
+  userPermissions: ['SendMessages'],
   type: ApplicationCommandType.ChatInput,
   options: [],
   command: {
     enabled: true,
-    aliases: ["stats", "statistics", "info"],
+    aliases: ['stats', 'statistics', 'info'],
     minArgsCount: 0,
   },
   slashCommand: {
@@ -26,21 +26,16 @@ module.exports = {
   },
 
   async msgExecute(client, message, args) {
-    await getBotStats(client, message.guild, message.author, async (embed) => {
+    await getBotStats(client, message.guild, message.author, async embed => {
       await message.reply({ embeds: [embed] });
     });
   },
 
   async interactionExecute(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
-    await getBotStats(
-      client,
-      interaction.guild,
-      interaction.user,
-      async (embed) => {
-        await interaction.editReply({ embeds: [embed] });
-      }
-    );
+    await getBotStats(client, interaction.guild, interaction.user, async embed => {
+      await interaction.editReply({ embeds: [embed] });
+    });
   },
 
   //   async autocompleteExecute(client, interaction) {},
@@ -65,59 +60,55 @@ async function getBotStats(client, guild, user, sendEmbed) {
     let UsageRam = formatBytes(memory.used);
 
     const embed = new EmbedBuilder()
-      .setColor(client.config.embed?.color || "#00FF99")
-      .setTitle("🚀 Bot Live Statistics")
+      .setColor(client.config.embed?.color || '#00FF99')
+      .setTitle('🚀 Bot Live Statistics')
       .setThumbnail(client.user.displayAvatarURL({ size: 1024 }))
       .addFields(
         {
-          name: "⏳ Memory Usage",
+          name: '⏳ Memory Usage',
           value: `\`${UsageRam}\` / \`${TotalRam}\``,
           inline: true,
         },
         {
-          name: "⌚ Uptime",
-          value: `<t:${Math.floor(
-            Date.now() / 1000 - client.uptime / 1000
-          )}:R>`,
+          name: '⌚ Uptime',
+          value: `<t:${Math.floor(Date.now() / 1000 - client.uptime / 1000)}:R>`,
           inline: true,
         },
-        { name: "📌 Bot Version", value: `\`${pkg.version}\``, inline: true },
+        { name: '📌 Bot Version', value: `\`${pkg.version}\``, inline: true },
         {
-          name: "🌍 Servers",
+          name: '🌍 Servers',
           value: `\`${client.guilds.cache.size}\``,
           inline: true,
         },
         {
-          name: "👥 Total Users",
-          value: `\`${client.guilds.cache
-            .reduce((acc, g) => acc + g.memberCount, 0)
-            .toLocaleString()}\``,
+          name: '👥 Total Users',
+          value: `\`${client.guilds.cache.reduce((acc, g) => acc + g.memberCount, 0).toLocaleString()}\``,
           inline: true,
         },
         {
-          name: "📁 Channels",
+          name: '📁 Channels',
           value: `\`${client.channels.cache.size}\``,
           inline: true,
         },
-        { name: "👾 Discord.JS", value: `v${version}`, inline: true },
-        { name: "🤖 Node", value: process.version, inline: true },
-        { name: "🏓 Ping", value: `${client.ws.ping}ms`, inline: true },
+        { name: '👾 Discord.JS', value: `v${version}`, inline: true },
+        { name: '🤖 Node', value: process.version, inline: true },
+        { name: '🏓 Ping', value: `${client.ws.ping}ms`, inline: true },
         {
-          name: "🖥 CPU Usage",
+          name: '🖥 CPU Usage',
           value: `${Math.floor(cpuUsage)}%`,
           inline: true,
         },
-        { name: "🛠 Arch", value: osInfo.arch, inline: true },
-        { name: "💻 Platform", value: osInfo.platform, inline: true },
+        { name: '🛠 Arch', value: osInfo.arch, inline: true },
+        { name: '💻 Platform', value: osInfo.platform, inline: true },
         {
-          name: "⚙ CPU",
+          name: '⚙ CPU',
           value: `\`\`\`ansi
 [2;33m${cpu.brand}[0m
 \`\`\``,
         },
 
         {
-          name: "🙋 Requested By",
+          name: '🙋 Requested By',
           value: `**${user.displayName}**`,
           inline: false,
         }
@@ -130,10 +121,8 @@ async function getBotStats(client, guild, user, sendEmbed) {
 
     return sendEmbed(embed);
   } catch (err) {
-    client.log(["errorColor", "ERROR:"], ["1", `An error occurred: ${err}`]);
-    const errorEmbed = new EmbedBuilder()
-      .setColor("Red")
-      .setDescription(`🙄 Unable to fetch bot statistics at the moment.`);
+    client.log(['errorColor', 'ERROR:'], ['1', `An error occurred: ${err}`]);
+    const errorEmbed = new EmbedBuilder().setColor('Red').setDescription(`🙄 Unable to fetch bot statistics at the moment.`);
     return sendEmbed(errorEmbed);
   }
 }

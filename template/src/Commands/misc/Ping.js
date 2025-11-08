@@ -12,7 +12,7 @@ module.exports = {
   options: [],
   type: ApplicationCommandType.ChatInput,
   command: {
-    enabled: false,
+    enabled: true,
     aliases: ['p', 'latency'],
     minArgsCount: 0,
   },

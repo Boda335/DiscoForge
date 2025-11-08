@@ -4,7 +4,7 @@ const pkg = require("../../package.json");
 module.exports = class UpdateChecker {
   static async checkVersionWithResult() {
     try {
-      const res = await fetch("https://api.github.com/repos/omar00050/quran_radio/tags");
+      const res = await fetch("https://api.github.com/repos/Boda335/DiscoForge/tags");
       if (!res.ok) {
         return { success: false, error: "Failed to fetch tags" };
       }

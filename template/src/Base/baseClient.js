@@ -7,27 +7,7 @@ class BaseNexus extends Client {
   constructor() {
     super({
       partials: [Partials.Channel, Partials.GuildMember, Partials.Message, Partials.User],
-      intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildModeration,
-        GatewayIntentBits.GuildEmojisAndStickers,
-        GatewayIntentBits.GuildIntegrations,
-        GatewayIntentBits.GuildWebhooks,
-        GatewayIntentBits.GuildInvites,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.GuildPresences,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.GuildMessageTyping,
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.DirectMessageReactions,
-        GatewayIntentBits.DirectMessageTyping,
-        GatewayIntentBits.GuildScheduledEvents,
-        GatewayIntentBits.AutoModerationConfiguration,
-        GatewayIntentBits.AutoModerationExecution,
-        GatewayIntentBits.MessageContent,
-      ],
+      intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildModeration, GatewayIntentBits.GuildEmojisAndStickers, GatewayIntentBits.GuildIntegrations, GatewayIntentBits.GuildWebhooks, GatewayIntentBits.GuildInvites, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildMessageTyping, GatewayIntentBits.DirectMessages, GatewayIntentBits.DirectMessageReactions, GatewayIntentBits.DirectMessageTyping, GatewayIntentBits.GuildScheduledEvents, GatewayIntentBits.AutoModerationConfiguration, GatewayIntentBits.AutoModerationExecution, GatewayIntentBits.MessageContent],
       shards: 'auto',
       failIfNotExists: false,
       allowedMentions: {
@@ -89,6 +69,7 @@ class BaseNexus extends Client {
     this.cooldowns = new Collection();
     this.commands = new Collection();
     this.aliases = new Collection();
+    this.statuses = new Collection();
     this.ComponentsAction = new Collection();
     this.mcategories = fs.readdirSync('src/Commands');
 
@@ -98,7 +79,7 @@ class BaseNexus extends Client {
     // 🖨️ Log function
     this.log = (...parts) => {
       const formatted = parts
-        .map((part) => {
+        .map(part => {
           if (typeof part === 'string') return part;
 
           if (Array.isArray(part) && part.length === 2) {
@@ -125,17 +106,9 @@ class BaseNexus extends Client {
 
         if (result.success) {
           if (result.updateAvailable) {
-            this.log(
-              ['warningColor', 'DiscoForge has a new update available:'],
-              ['infoColor', result.latest],
-              ['warningColor', ', you are on'],
-              ['infoColor', result.current],
-            );
+            this.log(['warningColor', 'DiscoForge has a new update available:'], ['infoColor', result.latest], ['warningColor', ', you are on'], ['infoColor', result.current]);
           } else {
-            this.log(
-              ['successColor', 'DiscoForge is up to date, you are on the latest version:'],
-              ['infoColor', result.current],
-            );
+            this.log(['successColor', 'DiscoForge is up to date, you are on the latest version:'], ['infoColor', result.current]);
           }
         } else {
           console.error('⚠️ Update check failed:', result.error);

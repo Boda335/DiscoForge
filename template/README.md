@@ -7,7 +7,7 @@
   
   *Build scalable, maintainable Discord bots with ease*
   
-  [![Discord](https://img.shields.io/discord/1006273962986188881?logo=discord&logoColor=%23fff&label=Discord&labelColor=%23505050&color=%235E6AE9)](https://discord.gg/AT6W2nHEVz)
+  [![Discord](https://img.shields.io/discord/1006273962986188881?logo=discord&logoColor=%23fff&label=Discord&labelColor=%23505050&color=%235E6AE9)](https://discord.gg/9cfgTktxHm)
   [![NPM License](https://img.shields.io/npm/l/discoforge)](LICENSE)
   [![NPM Version](https://img.shields.io/npm/v/discoforge)](https://www.npmjs.com/package/discoforge)
   [![Downloads](https://img.shields.io/npm/dm/discoforge)](https://www.npmjs.com/package/discoforge)
@@ -184,11 +184,11 @@ module.exports = {
     interval: 10000, // The interval time in milliseconds for changing the activity
     type: 'Custom', // You can choose between: Playing, Watching, Listening, Competing, Custom and Streaming
     names: [
-      'https://discord.gg/Wn6z6yD7n3',
-      `Made by Foxy Code Team`,
+      'https://discord.gg/9cfgTktxHm',
+      `Made by Nexus Studio Team`,
       `Made by Boda3350`,
       `Powered by DiscoForge`,
-      'discord.gg/AT6W2nHEVz',
+      'discord.gg/9cfgTktxHm',
     ], // The activities the bot will change between (You can put multiple activities in an array)
     // This is only for the STREAMING activity type
     streamingUrl: 'https://www.twitch.tv/example',
@@ -196,65 +196,6 @@ module.exports = {
 };
 
 ```
----
-
-## 🏗️ Project Structure
-
-```
-
-├── 📁 .vscode/
-├── 📁 errors/
-├── 📁 settings/
-│   ├── 📄 config.js
-│   └── 📄 discoforge.js
-├── 📁 src/
-│   ├── 📁 Base/
-│   │   ├── 📄 BaseFunction.js
-│   │   ├── 📄 baseClient.js
-│   │   ├── 📄 baseCommand.js
-│   │   └── 📄 baseComponent.js
-│   ├── 📁 Commands/
-│   │   ├── 📁 dev/
-│   │   │   └── 📄 re.js
-│   │   └── 📁 misc/
-│   │       ├── 📄 Ping.js
-│   │       ├── 📄 help.js
-│   │       └── 📄 stats.js
-│   ├── 📁 ComponentsAction/
-│   │   └── 📁 public/
-│   │       └── 📄 btn_info.js
-│   ├── 📁 events/
-│   │   ├── 📁 Client/
-│   │   │   └── 📄 ready.js
-│   │   ├── 📁 interactionCreate/
-│   │   │   └── 📄 interactionCreate.js
-│   │   └── 📁 messageCreate/
-│   │       └── 📄 messageCreate.js
-│   ├── 📁 functions/
-│   │   ├── 📄 cooldown.js
-│   │   ├── 📄 formatBytes.js
-│   │   ├── 📄 getPermissionName.js
-│   │   ├── 📄 getRandomString.js
-│   │   ├── 📄 handleInteraction.js
-│   │   ├── 📄 msToDuration.js
-│   │   ├── 📄 registerSlashCommands.js
-│   │   └── 📄 swap_pages.js
-│   └── 📁 handlers/
-│       ├── 📄 CommandLoader.js
-│       ├── 📄 ComponentsLoader.js
-│       ├── 📄 Database.js
-│       ├── 📄 EventsLoader.js
-│       ├── 📄 FunctionsLoader.js
-│       ├── 📄 Nexus.js
-│       ├── 📄 UpdateChecker.js
-│       ├── 📄 reloadAll.js
-│       └── 📄 utils.js
-├── 📄 .prettierrc
-├── 📝 CHANGELOG.md
-├── 📖 README.md
-└── 📄 bot.js
-```
-
 ---
 
 ## 🎮 Command System
@@ -600,7 +541,7 @@ We welcome contributions from the community! Here's how you can help:
 ### Development Setup
 
 ```bash
-git clone https://github.com/your-username/discoforge.git
+git clone https://github.com/Boda335/discoforge.git
 cd discoforge
 npm install
 npm run dev
@@ -618,20 +559,10 @@ npm run dev
   
   Join our community for support, discussion, and updates
   
-  [![Discord](https://img.shields.io/discord/1006273962986188881?logo=discord&logoColor=%23fff&label=Join%20Discord&labelColor=%23505050&color=%235E6AE9&style=for-the-badge)](https://discord.gg/AT6W2nHEVz)
+  [![Discord](https://img.shields.io/discord/1006273962986188881?logo=discord&logoColor=%23fff&label=Join%20Discord&labelColor=%23505050&color=%235E6AE9&style=for-the-badge)](https://discord.gg/9cfgTktxHm)
   
 </td>
-<td align="center">
-  
-  ### 📚 Documentation
-  
-  Comprehensive guides and tutorials
-  
-  [![Docs](https://img.shields.io/badge/Read%20Docs-blue?style=for-the-badge&logo=gitbook&logoColor=white)](https://docs.discoforge.dev)
-  
-</td>
-</tr>
-<tr>
+
 <td align="center">
   
   ### 🐛 Bug Reports
@@ -641,24 +572,13 @@ npm run dev
   [![Issues](https://img.shields.io/badge/Report%20Bug-red?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Boda335/DiscoForge/issues)
   
 </td>
-<td align="center">
-  
-  ### 💡 Feature Requests
-  
-  Suggest new features and improvements
-  
-  [![Features](https://img.shields.io/badge/Request%20Feature-green?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Boda335/DiscoForge/discussions)
-  
-</td>
-</tr>
+
 </table>
 
 ### Getting Help
 
 - **Discord Support**: Real-time help from community and maintainers
 - **GitHub Issues**: Bug reports and feature requests
-- **Documentation**: Comprehensive guides and examples
-- **Stack Overflow**: Tag your questions with `discoforge`
 
 ---
 
@@ -674,7 +594,7 @@ DiscoForge wouldn't be possible without these amazing technologies and contribut
 ### Special Thanks
 
 - [Boda3350](https://discord.com/users/1139143053387509840) - Project Creator
-- Foxy Code Team - Development Team
+- [Nexus Studio Team](https://discord.gg/9cfgTktxHm) - Development Team
 - Our amazing community of bot developers
 
 ---

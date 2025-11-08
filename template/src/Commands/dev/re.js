@@ -24,17 +24,9 @@ module.exports = {
   async msgExecute(client, message, args) {
     try {
       const type = args[0]?.toLowerCase() || 'all';
-      const { slashCommandsCount, eventsCount, loadedCount, functionsCount } = await reloadAll(
-        client,
-        type,
-      );
+      const { slashCommandsCount, eventsCount, loadedCount, functionsCount } = await reloadAll(client, type);
 
-      const msgData = `\`\`\`
-${['all', 'commands'].includes(type) ? `DONE Load All Commands: ${slashCommandsCount}` : ''}
-${['all', 'events'].includes(type) ? `DONE Load All Events: ${eventsCount}` : ''}
-${['all', 'components'].includes(type) ? `DONE Load All Components: ${loadedCount}` : ''}
-${['all', 'Functions'].includes(type) ? `DONE Load All Functions: ${functionsCount}` : ''}
-\`\`\``;
+      const msgData = `\`\`\`DONE Load All Commands: ${slashCommandsCount}``DONE Load All Events: ${eventsCount}``DONE Load All Components: ${loadedCount}``DONE Load All Functions: ${functionsCount}``\`\``;
 
       await message.reply({ content: msgData });
     } catch (error) {
@@ -48,17 +40,9 @@ ${['all', 'Functions'].includes(type) ? `DONE Load All Functions: ${functionsCou
   async interactionExecute(client, interaction) {
     try {
       const type = interaction.options.getString('type') || 'all';
-      const { slashCommandsCount, eventsCount, loadedCount, functionsCount } = await reloadAll(
-        client,
-        type,
-      );
+      const { slashCommandsCount, eventsCount, loadedCount, functionsCount } = await reloadAll(client, type);
 
-      const msgData = `\`\`\`
-${['all', 'commands'].includes(type) ? `DONE Load All Commands: ${slashCommandsCount}` : ''}
-${['all', 'events'].includes(type) ? `DONE Load All Events: ${eventsCount}` : ''}
-${['all', 'components'].includes(type) ? `DONE Load All Components: ${loadedCount}` : ''}
-${['all', 'functions'].includes(type) ? `DONE Load All Functions: ${functionsCount}` : ''}
-\`\`\``;
+      const msgData = `\`\`\`DONE Load All Commands: ${slashCommandsCount}``DONE Load All Events: ${eventsCount}``DONE Load All Components: ${loadedCount}``DONE Load All Functions: ${functionsCount}``\`\``;
 
       await interaction.reply({ content: msgData });
     } catch (error) {

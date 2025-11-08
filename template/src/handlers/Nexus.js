@@ -10,11 +10,9 @@ class NEXUS extends BaseNexus {
   }
 
   start(token) {
-    ['CommandLoader', 'EventsLoader', 'FunctionsLoader', 'ComponentsLoader', 'utils'].forEach(
-      (handler) => {
-        require(`./${handler}`)(this);
-      },
-    );
+    ['intro','CommandLoader', 'EventsLoader', 'FunctionsLoader', 'ComponentsLoader'].forEach(handler => {
+      require(`./${handler}`)(this);
+    });
     this.login(token);
   }
 
@@ -46,9 +44,7 @@ class NEXUS extends BaseNexus {
   }
 
   async handleHelpSystem(interaction, message) {
-    const send = interaction?.deferred
-      ? interaction.followUp.bind(interaction)
-      : interaction.reply.bind(interaction);
+    const send = interaction?.deferred ? interaction.followUp.bind(interaction) : interaction.reply.bind(interaction);
 
     const user = interaction?.user || interaction?.member?.user || message?.author;
     const commands = this.commands;
@@ -71,8 +67,8 @@ class NEXUS extends BaseNexus {
       .setPlaceholder('Select a category')
       .addOptions(
         categories
-          .filter((cat) => cat !== 'dev')
-          .map((cat) => ({
+          .filter(cat => cat !== 'dev')
+          .map(cat => ({
             label: `${emoji[cat] || defaultEmoji} ${cat}`,
             value: cat,
             description: `View commands in the ${cat} category`,
@@ -82,7 +78,7 @@ class NEXUS extends BaseNexus {
           emoji: '🏠',
           value: 'home',
           description: 'Return to the main help menu',
-        },
+        }
       );
 
     const row = new ActionRowBuilder().addComponents(selectMenu);
@@ -94,9 +90,7 @@ class NEXUS extends BaseNexus {
         iconURL: this.user.displayAvatarURL({ dynamic: true }),
       })
       .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-      .setDescription(
-        '**An advanced Music System with Audio Filtering, a unique Music Request System, and much more!**',
-      )
+      .setDescription('**An advanced Music System with Audio Filtering, a unique Music Request System, and much more!**')
       .addFields([
         {
           name: `Stats`,
@@ -111,7 +105,7 @@ class NEXUS extends BaseNexus {
       ephemeral: true,
     });
 
-    const filter = async (i) => {
+    const filter = async i => {
       if (i.user.id === user.id) return true;
       await i.deferReply().catch(() => {});
       i.followUp({
@@ -126,7 +120,7 @@ class NEXUS extends BaseNexus {
       time: 60000,
     });
 
-    collector.on('collect', async (i) => {
+    collector.on('collect', async i => {
       if (i.isStringSelectMenu()) {
         await i.deferUpdate().catch(() => {});
         const directory = i.values[0];
@@ -136,17 +130,13 @@ class NEXUS extends BaseNexus {
         } else {
           const categoryEmbed = new EmbedBuilder()
             .setColor(this.config.embed.color)
-            .setTitle(
-              `${emoji[directory] || defaultEmoji} ${directory} Commands ${
-                emoji[directory] || defaultEmoji
-              }`,
-            )
+            .setTitle(`${emoji[directory] || defaultEmoji} ${directory} Commands ${emoji[directory] || defaultEmoji}`)
             .setThumbnail(this.user.displayAvatarURL())
             .setFooter(this.getFooter(user));
 
           let categoryCommands = commands
-            .filter((cmd) => cmd.category === directory)
-            .map((cmd) => {
+            .filter(cmd => cmd.category === directory)
+            .map(cmd => {
               const cmdEmoji = cmd.emoji || ':pushpin:';
               let lines = [`> ${cmdEmoji} \`${cmd.name}\` - ${cmd.description}`];
 
@@ -155,7 +145,7 @@ class NEXUS extends BaseNexus {
               }
 
               if (cmd.options?.length > 0) {
-                const opts = cmd.options.map((opt) => `\`${opt.name}\``).join(', ');
+                const opts = cmd.options.map(opt => `\`${opt.name}\``).join(', ');
                 lines.push(`> ⚙️ Options: ${opts}`);
               }
 

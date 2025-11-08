@@ -4,17 +4,11 @@ const mongoose = require('mongoose');
 /**
  * @param {NEXUS} client
  */
-module.exports = async (client) => {
+module.exports = async client => {
   const mongoURL = client.config.MONGO_URL;
 
   if (!mongoURL || mongoURL.trim() === '' || mongoURL.includes('MONGODB_URL')) {
-    client.log(
-      ['warningColor', 'WARNING:'],
-      [
-        '1',
-        'MongoDB URL is not provided or is set to the default placeholder. Skipping MongoDB connection.',
-      ],
-    );
+    client.log(['warningColor', 'WARNING:'], ['1', 'MongoDB URL is not provided or is set to the default placeholder. Skipping MongoDB connection.']);
     return;
   }
 
