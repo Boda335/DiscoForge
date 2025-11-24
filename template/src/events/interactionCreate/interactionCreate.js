@@ -3,17 +3,14 @@ const getPermissionName = require('../../functions/getPermissionName');
 const handleInteraction = require('../../functions/handleInteraction');
 const { emoji } = require('../../../settings/config');
 const { ApplicationCommandOptionType, EmbedBuilder, PermissionsBitField } = require('discord.js');
-const Nexus = require('../../handlers/Nexus');
+const BEV = require('@base/baseEvents');
 
+/** @type {BEV.BaseEvent<"interactionCreate">} */
 module.exports = {
   name: 'interactionCreate',
+  target: 'client',
   once: false,
-
-  /**
-   * @param {import('discord.js').Interaction} interaction
-   * @param {Nexus} client
-   */
-  async execute(interaction, client) {
+  async execute(client, interaction) {
     if (interaction.isAutocomplete()) {
       const cmd = client.commands.get(interaction.commandName);
       if (!cmd || typeof cmd.autocompleteExecute !== 'function') return;
@@ -25,8 +22,6 @@ module.exports = {
       }
       return;
     }
-
-    // ✅ Slash Command Handling
     if (interaction.isCommand()) {
       const cmd = client.commands.get(interaction.commandName);
       if (!cmd) {

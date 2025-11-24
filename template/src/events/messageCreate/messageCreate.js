@@ -2,16 +2,15 @@ const cooldown = require('../../functions/cooldown');
 const getPermissionName = require('../../functions/getPermissionName');
 const { PREFIX: botPrefix } = require('../../../settings/config');
 const { PermissionsBitField, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const Nexus = require('../../handlers/Nexus');
+const BEV = require('@base/baseEvents');
 
+/** @type {BEV.BaseEvent<"messageCreate">} */
 module.exports = {
   name: 'messageCreate',
+  target: 'client',
   once: false,
-  /**
-   * @param {import('discord.js').Message} message
-   * @param {Nexus} client
-   */
-  async execute(message, client) {
+
+  async execute(client, message) {
     if (message.author.bot || !message.guild || !message.id) return;
     const prefix = botPrefix;
     let mentionprefix = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);

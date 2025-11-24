@@ -1,28 +1,23 @@
 const { ActivityType } = require('discord.js');
 const registerSlashCommands = require('../../functions/registerSlashCommands');
 const Database = require('../../handlers/Database.js');
-const NEXUS = require('../../handlers/Nexus.js');
 const discoforge = require('../../../settings/discoforge.js');
+const BEV = require('@base/baseEvents');
+
+/** @type {BEV.BaseEvent<"clientReady">} */
 module.exports = {
   name: 'clientReady',
+  target: 'client',
   once: true,
-  /**
-   * @param {NEXUS} client
-   */
   async execute(client) {
     try {
       const presenceConfig = discoforge.presence || {};
-
       if (presenceConfig.enabled) {
         const names = Array.isArray(presenceConfig.names) ? presenceConfig.names : [presenceConfig.names];
 
         let index = 0;
         setInterval(() => {
-          client.user.setActivity({
-            name: names[index],
-            type: ActivityType[presenceConfig.type] || ActivityType.Playing,
-            url: presenceConfig.type.toUpperCase() === 'STREAMING' ? presenceConfig.streamingUrl : undefined,
-          });
+          client.user.setActivity({ name: names[index], type: ActivityType[presenceConfig.type] || ActivityType.Playing, url: presenceConfig.type.toUpperCase() === 'STREAMING' ? presenceConfig.streamingUrl : undefined });
           index = (index + 1) % names.length;
         }, presenceConfig.interval);
 

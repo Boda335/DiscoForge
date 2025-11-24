@@ -3,23 +3,23 @@
   // This snippet edited by ChatGPT on user request
   // Now using updated command template with discord.js destructuring.
 
-  "DiscoForge Command Snippet": {
+  "DiscoForge Full Command Snippet": {
     "prefix": ["cmd", "dxc"],
     "scope": "javascript",
-    "body": ["const {", "ApplicationCommandType,", "} = require(\"discord.js\");", "", "/**", " * @type {import(\"../../Base/baseCommand\")}", " */", "module.exports = {", "  name: \"${1:commandName}\",", "  description: \"${2:commandDescription}\",", "  cooldown: 10,", "  category: \"${3:general}\",", "  botPermissions: [],", "  userPermissions: [],", "  options: [],", "  type: ApplicationCommandType.ChatInput,", "  command: {", "    enabled: true,", "    aliases: [],", "    minArgsCount: 0,", "  },", "  slashCommand: {", "    enabled: true,", "  },", "", "  async msgExecute(client, message, args) {", "    ", "  },", "", "  async interactionExecute(client, interaction) {", "    ", "  },", "", "  async autocompleteExecute(client, interaction) {", "    ", "  },", "};"],
-    "description": "Updated DiscoForge Command Snippet with discord.js structure"
+    "body": ["const { ApplicationCommandType } = require(\"discord.js\");", "", "/**", " * @type {import(\"@base/baseClient.js\")} ", " */", "module.exports = {", "  name: \"${1:commandName}\",", "  description: \"${2:commandDescription}\",", "  cooldown: 10,", "  category: \"${3:general}\",", "  botPermissions: [],", "  userPermissions: [],", "  options: [],", "  type: ApplicationCommandType.ChatInput,", "", "  command: {", "    enabled: true,", "    aliases: [],", "    minArgsCount: 0,", "  },", "", "  slashCommand: {", "    enabled: true,", "  },", "", "  async msgExecute(client, message, args) {", "    try {", "      // Message Command logic goes here", "    } catch (error) {", "      client.log([errorColor, `Error in command ${this.name}:`], ['1', error.message]);", "      message.reply({ content: 'An error occurred while executing the command.' });", "    }", "  },", "", "  async interactionExecute(client, interaction) {", "    try {", "      // Slash Command logic goes here", "    } catch (error) {", "      client.log([errorColor, `Error in command ${this.name}:`], ['1', error.message]);", "      interaction.reply({ content: 'An error occurred while executing the command.', ephemeral: true });", "    }", "  },", "", "  async autocompleteExecute(client, interaction) {", "    try {", "      // Autocomplete logic goes here", "    } catch (error) {", "      client.log([errorColor, `Error in autocomplete for command ${this.name}:`], ['1', error.message]);", "    }", "  },", "};"],
+    "description": "Full DiscoForge Command Snippet with try/catch error handling"
   },
 
-  "DiscoForge Event Snippet": {
+  "DiscoForge BaseEvent Snippet": {
     "prefix": ["event"],
     "scope": "javascript",
-    "body": ["const NEXUS = require(\"../../handlers/Client\");", "module.exports = {", "  name: \"${1:eventName}\",", "  once: ${2:true},", "  /**", "   * @param {NEXUS} client", "   */", "  async execute(client) {", "    try {", "      ${3:// Code}", "    } catch (error) {", "      console.error(error);", "    }", "  },", "};"],
-    "description": "DiscoForge Event Template with client handler and error catching"
+    "body": ["const BEV = require('@base/baseEvents');", "/** @type {BEV.BaseEvent<\"${1:eventName}\">} */", "module.exports = {", "  name: \"${1:eventName}\",", "  target: \"${2:client}\",", "  once: ${3:false},", "  async execute(client) {", "    try {", "      ${4:// Event logic goes here}", "    } catch (error) {", "      client.log([errorColor, `Error in event ${1:eventName}:`], ['1', error.message]);", "    }", "  },", "};"],
+    "description": "DiscoForge BaseEvent Template matching BEV structure with client log and error handling"
   },
   "DiscoForge Component Snippet": {
     "prefix": ["component", "action"],
     "scope": "javascript",
-    "body": ["/**", " * @type {import(\"../../Base/baseComponent\")}", " */", "module.exports = {", "  name: \"${1:componentName}\",", "  enabled: true,", "  botPermissions: [],", "  userPermissions: [],", "", "  action: async (client, interaction, parts) => {", "    await interaction.deferUpdate();", "    let member = interaction.member;", "", "    try {", "      ${2:// Code}", "    } catch (error) {", "      console.error(`Error in ${1:componentName}:`, error);", "      await interaction.followUp({", "        content: \"😓 i am sorry, it seems like i am having some issues right now, please try again later.\",", "        ephemeral: true,", "      });", "    }", "  },", "};"],
+    "body": ["/**", " * @type {import(\"@base/baseComponent\")}", " */", "module.exports = {", "  name: \"${1:componentName}\",", "  enabled: true,", "  botPermissions: [],", "  userPermissions: [],", "", "  action: async (client, interaction, parts) => {", "    await interaction.deferReply();", "", "    try {", "      ${2:// Component logic goes here}", "    } catch (error) {", "      client.log([errorColor, `Error in component ${1:componentName}:`], ['1', error.message]);", "      await interaction.editReply({", "        content: \"😓 i am sorry, it seems like i am having some issues right now, please try again later.\",", "        ephemeral: true,", "      });", "    }", "  },", "};"],
     "description": "DiscoForge Component Template for buttons/selects with error handling"
   }
 }

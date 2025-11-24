@@ -21,61 +21,57 @@ function getAllFiles(dirPath, arrayOfFiles = []) {
 }
 
 function reloadEvents(client) {
-  client.removeAllListeners();
-  if (client.distube) client.distube.removeAllListeners();
+  for (const key of Object.keys(client)) {
+    if (client[key] && typeof client[key].removeAllListeners === 'function') {
+      client[key].removeAllListeners();
+    }
+  }
 
-  const loadedFiles = client.statuses;
   const eventFiles = getAllFiles('src/events');
   const eventsTable = new AsciiTable('Events');
-  eventsTable.setHeading('Event File', 'Status');
+  eventsTable.setHeading('File', 'Target', 'Status');
   eventsTable.setBorder('║', '═', '✥', '🌟');
 
-  const statuses = [];
-  let eventCount = 0;
+  let count = 0;
 
   for (const file of eventFiles) {
     try {
       clearRequireCache(path.resolve(file));
       const event = require(path.resolve(file));
 
-      if (!event.name || typeof event.execute !== 'function') {
-        eventsTable.addRow(path.basename(file), chalk.red('❌'));
-        client.log(['warningColor', 'WARNING:'], ['1', `Skipping ${file} (missing name or execute function)`]);
+      if (!event.name || typeof event.execute !== 'function' || !event.target) {
+        eventsTable.addRow(path.basename(file), event.target || '-', chalk.red('❌'));
+        client.log(['warningColor', 'WARNING:'], ['1', `Skipping ${file} (missing name/execute/target)`]);
         continue;
       }
 
-      const isDistubeEvent = ['playSong', 'addSong', 'playList', 'addList', 'searchResult', 'searchCancel', 'error', 'finish', 'finishSong', 'disconnect', 'empty', 'initQueue'].includes(event.name);
-
-      if (isDistubeEvent && client.distube) {
-        if (event.once) client.distube.once(event.name, (...args) => event.execute(...args, client));
-        else client.distube.on(event.name, (...args) => event.execute(...args, client));
-      } else {
-        if (event.once) client.once(event.name, (...args) => event.execute(...args, client));
-        else client.on(event.name, (...args) => event.execute(...args, client));
+      const target = event.target === 'client' ? client : client[event.target];
+      if (!target) {
+        eventsTable.addRow(path.basename(file), event.target, chalk.red('❌ Unknown target'));
+        client.log(['warningColor', 'WARNING:'], ['1', `Target ${event.target} not found in client for ${file}`]);
+        continue;
       }
 
-      const status = loadedFiles.has(file) ? 'Reloaded' : 'Loaded';
-      loadedFiles.set(file, true);
-      statuses.push(status);
+      if (event.once && typeof target.once === 'function') {
+        target.once(event.name, (...args) => event.execute(client, ...args));
+      } else if (typeof target.on === 'function') {
+        target.on(event.name, (...args) => event.execute(client, ...args));
+      } else {
+        eventsTable.addRow(path.basename(file), event.target, chalk.red('❌ No on/once'));
+        continue;
+      }
 
-      eventsTable.addRow(path.basename(file), status);
-      eventCount++;
+      eventsTable.addRow(path.basename(file), event.target, '✅');
+      count++;
     } catch (error) {
-      eventsTable.addRow(path.basename(file), chalk.red('❌'));
+      eventsTable.addRow(path.basename(file), '-', chalk.red('❌'));
       client.log(['errorColor', 'ERROR:'], ['1', `Failed to load ${file}: ${error.message}`]);
     }
   }
 
-  let overallStatus;
-  if (statuses.every(s => s === 'Loaded')) overallStatus = 'Loaded';
-  else if (statuses.every(s => s === 'Reloaded')) overallStatus = 'Reloaded';
-  else overallStatus = 'Mixed';
-
+  client.log(['successColor', 'SUCCESS:'], ['1', `${count} Events Reloaded`]);
   // console.log(eventsTable.toString());
-
-  client.log(['successColor', 'SUCCESS:'], ['1', `${eventCount} Events ${overallStatus}`]);
-
-  return eventCount;
+  return count;
 }
 
 module.exports = reloadEvents;
