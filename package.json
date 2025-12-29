@@ -4,13 +4,13 @@
   "description": "A professional Discord bot scaffolding CLI built with Node.js.",
   "main": "index.js",
   "bin": {
-    "discoforge": "./index.js"
+    "discoforge": "index.js"
   },
   "author": "boda335",
   "license": "Apache-2.0 license",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Boda335/DiscoForge"
+    "url": "git+https://github.com/Boda335/DiscoForge.git"
   },
   "bugs": {
     "url": "https://github.com/Boda335/DiscoForge/issues"
