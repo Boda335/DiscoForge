@@ -1,5 +1,5 @@
-const boxen = require('boxen').default;
-const gradient = require('gradient-string').default;
+const boxen = require('boxen');
+const gradient = require('gradient-string');
 const chalk = require('chalk');
 
 const coolGradient = gradient(['#00fffe', '#f30dff']);

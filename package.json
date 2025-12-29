@@ -1,6 +1,6 @@
 {
   "name": "discoforge",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "A professional Discord bot scaffolding CLI built with Node.js.",
   "main": "index.js",
   "bin": {
@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "boxen": "^8.0.1",
+    "boxen": "^5.1.2",
     "chalk": "^4.1.2",
-    "gradient-string": "^3.0.0"
+    "gradient-string": "^2.0.2"
   }
 }

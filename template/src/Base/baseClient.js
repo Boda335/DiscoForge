@@ -18,50 +18,17 @@ class BaseNexus extends Client {
       },
     });
     const styles = {
-      successColor: {
-        color: chalk.bold.green,
-        emoji: '🟢',
-      },
-      warningColor: {
-        color: chalk.bold.yellow,
-        emoji: '🟡',
-      },
-      infoColor: {
-        color: chalk.bold.blue,
-        emoji: '🔷',
-      },
-      commandColor: {
-        color: chalk.bold.cyan,
-        emoji: '⚙️',
-      },
-      userColor: {
-        color: chalk.bold.magenta,
-        emoji: '🙍',
-      },
-      errorColor: {
-        color: chalk.bold.red,
-        emoji: '🔴',
-      },
-      highlightColor: {
-        color: chalk.bold.hex('#FFA500'),
-        emoji: '📍',
-      },
-      accentColor: {
-        color: chalk.bold.hex('#00FF7F'),
-        emoji: '💎',
-      },
-      secondaryColor: {
-        color: chalk.hex('#ADD8E6'),
-        emoji: '🔹',
-      },
-      primaryColor: {
-        color: chalk.bold.hex('#FF1493'),
-        emoji: '💠',
-      },
-      dividerColor: {
-        color: chalk.hex('#FFD700'),
-        emoji: '━',
-      },
+      successColor: { color: chalk.bold.green, emoji: '🟢' },
+      warningColor: { color: chalk.bold.yellow, emoji: '🟡' },
+      infoColor: { color: chalk.bold.blue, emoji: '🔷' },
+      commandColor: { color: chalk.bold.cyan, emoji: '⚙️' },
+      userColor: { color: chalk.bold.magenta, emoji: '🙍' },
+      errorColor: { color: chalk.bold.red, emoji: '🔴' },
+      highlightColor: { color: chalk.bold.hex('#FFA500'), emoji: '📍' },
+      accentColor: { color: chalk.bold.hex('#00FF7F'), emoji: '💎' },
+      secondaryColor: { color: chalk.hex('#ADD8E6'), emoji: '🔹' },
+      primaryColor: { color: chalk.bold.hex('#FF1493'), emoji: '💠' },
+      dividerColor: { color: chalk.hex('#FFD700'), emoji: '━' },
     };
     this.styles = styles;
     // 🧠 Collections

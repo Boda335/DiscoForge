@@ -5,9 +5,9 @@ const path = require('path');
 const basePkg = require('./package.json');
 const { execSync } = require('child_process');
 const { outro, confirm, text, isCancel } = require('@clack/prompts');
-const boxen = require('boxen').default;
+const boxen = require('boxen');
 const chalk = require('chalk');
-const gradient = require('gradient-string').default;
+const gradient = require('gradient-string');
 const introGradient = gradient(['#4b6cb7', '#182848']);
 const successGradient = gradient(['#00b09b', '#96c93d']);
 const questionColor = chalk.hex('#6a8caf');
@@ -70,7 +70,7 @@ const asciiArt = `
   createEnvFile(targetDir);
 
   if (installDeps) {
-    const deps = ['discoforge', 'axios', 'chalk@4', 'moment', 'ms', 'systeminformation', 'ascii-table', 'module-alias', 'dotenv@16.3.1', 'boxen', 'gradient-string'];
+    const deps = ['discoforge', 'axios', 'chalk@4', 'moment', 'ms', 'systeminformation', 'ascii-table', 'module-alias', 'dotenv@16.3.1', 'boxen@5', 'gradient-string@2'];
     if (installDiscordJS) deps.push('discord.js');
     if (installMongo) deps.push('mongoose');
 
@@ -156,7 +156,6 @@ async function copyRecursiveWithProgress(src, dest) {
 
   const elapsedSeconds = ((Date.now() - startTime) / 1000).toFixed(1);
   process.stdout.write(` | ${elapsedSeconds}s\n`);
-
 }
 
 function createPackageJson(dir) {
